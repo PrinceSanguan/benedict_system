@@ -1,0 +1,799 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 18, 2024 at 03:16 PM
+-- Server version: 10.11.9-MariaDB
+-- PHP Version: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `u313905368_sdg`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `details` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `submitted_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `subject`, `details`, `status`, `submitted_by`, `created_at`, `updated_at`) VALUES
+(1, 'Normal 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 0, 1, '2024-09-29 20:50:29', '2024-09-29 20:50:29'),
+(2, 'Important', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, 1, '2024-09-29 20:50:40', '2024-09-29 20:50:40'),
+(3, 'SDG SEMINAR', 'UN Conferences and High-Level Events related to sustainable development, Multi-stakeholder Forum on Science, Technology and Innovation for the SDGs.', 1, 5, '2024-10-22 00:05:04', '2024-10-22 00:05:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carbon_footprints`
+--
+
+CREATE TABLE `carbon_footprints` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `carbon_type` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `attachment` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carbon_footprints`
+--
+
+INSERT INTO `carbon_footprints` (`id`, `user_id`, `carbon_type`, `description`, `attachment`, `created_at`, `updated_at`) VALUES
+(1, 2, 11, 'asdasd asd asd', 'uploads/02b721f5-093b-4fec-b0f8-5baa2c5164ec.txt', '2024-10-12 06:45:04', '2024-10-12 06:45:04'),
+(2, 2, 12, 'asd asd asd as dasd', 'uploads/d37dd834-496e-44eb-bf3b-c1250b8c2e0c.doc', '2024-10-12 06:45:26', '2024-10-12 06:45:26'),
+(3, 3, 21, 'fuel consumption of BSU today', 'uploads/5933f7a3-3e14-4fac-8884-7af9c11b6d57.png', '2024-10-22 04:19:46', '2024-10-22 04:19:46'),
+(4, 2, 11, 'Data of Water in BSU Malvar Campus', 'uploads/07bfba77-b84c-4c8f-84ec-1d1db437e434.xlsx', '2024-10-22 06:16:49', '2024-10-22 06:16:49'),
+(5, 2, 12, 'Electricity of BSU Malvar Campus', 'uploads/14a10340-00ee-462a-a869-050ec06b53f9.xlsx', '2024-10-22 06:17:50', '2024-10-22 06:17:50'),
+(6, 2, 13, 'Solid Waste Batangas State University Malvar', 'uploads/89d2f9f9-516b-43ce-a4c6-a4a2ec561acc.xlsx', '2024-10-22 06:19:27', '2024-10-22 06:19:27'),
+(7, 3, 21, 'Fuel Data in BSU Malvar Campus', 'uploads/a3589edf-5cc2-4ab9-bf45-9df7fe484396.xlsx', '2024-10-22 06:23:45', '2024-10-22 06:23:45'),
+(8, 2, 12, 'electricity data', 'uploads/bca29ebd-b61b-48fd-b8c7-af37bca305d4.pdf', '2024-11-05 02:31:07', '2024-11-05 02:31:07'),
+(9, 3, 21, 'fuel data', 'uploads/ed4489b1-9baa-4bf7-a761-584950ba0c33.pdf', '2024-11-05 02:32:50', '2024-11-05 02:32:50'),
+(10, 2, 11, 'water comsumption for this month', 'uploads/b61cdece-194d-4fa9-aa81-703f8779f895.xlsx', '2024-11-05 03:42:20', '2024-11-05 03:42:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carbon_reports`
+--
+
+CREATE TABLE `carbon_reports` (
+  `id` int(11) NOT NULL,
+  `report_title` varchar(245) DEFAULT NULL,
+  `supporting_document` text DEFAULT NULL,
+  `calculated_data` varchar(245) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `fuel_value` varchar(245) DEFAULT NULL,
+  `fuel_unit` varchar(245) DEFAULT NULL,
+  `fuel_type` varchar(245) DEFAULT NULL,
+  `water_value` varchar(245) DEFAULT NULL,
+  `water_unit` varchar(245) DEFAULT NULL,
+  `electricity_value` varchar(245) DEFAULT NULL,
+  `electricity_unit` varchar(245) DEFAULT NULL,
+  `waste_value` varchar(245) DEFAULT NULL,
+  `waste_unit` varchar(245) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carbon_reports`
+--
+
+INSERT INTO `carbon_reports` (`id`, `report_title`, `supporting_document`, `calculated_data`, `comment`, `fuel_value`, `fuel_unit`, `fuel_type`, `water_value`, `water_unit`, `electricity_value`, `electricity_unit`, `waste_value`, `waste_unit`, `created_at`, `updated_at`) VALUES
+(1, 'Test', NULL, '0.41 kg CO2', 'The calculated carbon footprint is based on the values provided for fuel and water consumption. The carbon footprint for gasoline is calculated using the formula: (Fuel Value * carbon factor for gasoline), where the carbon factor for gasoline is approximately 2.31 kg CO2 per liter. For 50 liters of gasoline, the calculation is 50 * 2.31 = 115.5 kg CO2. The water consumption does not directly contribute to carbon footprint in this context, so only fuel was considered for calculation. The four solutions for each category were generated based on best practices for sustainability in water and fuel management.', '50', 'liter', 'gasoline', '200', 'liter', NULL, 'kilowatt hour', NULL, 'kilogram', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(2, 'BSU carbon latest', NULL, '6.04 kg CO2', 'The calculated carbon footprint is derived from the following categories with numerical values: Fuel (21 liters of gasoline), Electricity (40 kilowatt hours), Water (31 liters), and Waste (32 kilograms). Each category has been assigned solutions that focus on reducing impacts and promoting sustainability within the campus. The calculations include the conversion of these values to their respective carbon emissions, resulting in a total footprint of 6.04 kg CO2.', '21', 'liter', 'gasoline', '31', 'liter', '40', 'kilowatt hour', '32', 'kilogram', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(3, 'data consumption', NULL, '2.45 kg CO2', 'The calculated carbon footprint of 2.45 kg CO2 was derived from the following values: Fuel (20 liters of gasoline, approximately 2.31 kg CO2), Electricity (10 kilowatt-hours, approximately 0.73 kg CO2), Water (10 liters has negligible direct CO2 emissions, but conservation efforts can mitigate overall environmental impact), and Waste (5 kg also has negligible direct emissions but contributes to landfill emissions). Thus, the total emissions were calculated from the fuel and electricity categories, as they have numerical values. Each category has been provided with 4 tailored solutions aimed at sustainability.', '20', 'liter', 'gasoline', '10', 'liter', '10', 'kilowatt hour', '05', 'kilogram', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(4, 'ajsdhasdha', NULL, '6.29 kg CO2e', 'The calculated carbon footprint is derived from the fuel consumption of 2700 liters of gasoline. Using the standard conversion factor of 2.33 kg CO2 per liter of gasoline, the total carbon footprint is calculated as follows: 2700 liters * 2.33 kg CO2/liter = 6291 kg CO2e, which is rounded to 6.29 kg CO2e. The only category present with numerical values is \'Fuel\', so I have provided four solutions related to fuel efficiency and consumption.', '2700', 'liter', 'gasoline', NULL, 'liter', NULL, 'kilowatt hour', NULL, 'kilogram', '2024-11-05 04:23:11', '2024-11-05 04:23:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carbon_solutions`
+--
+
+CREATE TABLE `carbon_solutions` (
+  `id` int(11) NOT NULL,
+  `carbon_report_id` int(11) DEFAULT NULL,
+  `title` varchar(445) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carbon_solutions`
+--
+
+INSERT INTO `carbon_solutions` (`id`, `carbon_report_id`, `title`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 'water conservation', 'Implement rainwater harvesting systems to collect and store rainwater for irrigation and non-potable uses, reducing reliance on treated water.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(2, 1, 'efficient fixtures', 'Install low-flow faucets, showerheads, and toilets to significantly reduce water usage in campus facilities.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(3, 1, 'water recycling', 'Set up greywater recycling systems to repurpose water from sinks and showers for landscape irrigation.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(4, 1, 'awareness campaigns', 'Conduct educational campaigns to promote water conservation practices among students and staff on campus.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(5, 1, 'fuel-efficient transportation', 'Encourage the use of fuel-efficient vehicles or electric vehicles for campus transportation to reduce gasoline consumption.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(6, 1, 'carpooling program', 'Establish a carpooling program to reduce the number of vehicles on campus, thereby lowering gasoline consumption.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(7, 1, 'public transport incentives', 'Provide incentives for students and staff to use public transportation instead of personal vehicles to decrease reliance on gasoline.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(8, 1, 'bicycle infrastructure', 'Develop and enhance bicycle lanes and facilities to encourage cycling as an alternative mode of transport, reducing gasoline use.', '2024-10-21 15:58:16', '2024-10-21 15:58:16'),
+(9, 2, 'Water Conservation Initiatives', 'Implement water-saving fixtures and practices such as low-flow faucets and toilet retrofits to reduce overall water consumption.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(10, 2, 'Rainwater Harvesting', 'Install systems to collect and store rainwater for irrigation and non-potable uses, reducing reliance on treated water.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(11, 2, 'Awareness Campaigns', 'Conduct educational programs on water conservation to encourage students and staff to use water more efficiently.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(12, 2, 'Regular Leak Audits', 'Perform routine checks for leaks in plumbing systems to minimize water loss and ensure efficient usage.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(13, 2, 'Fuel-Efficient Transportation Options', 'Promote the use of public transportation, cycling, or carpooling to reduce gasoline consumption and lower carbon emissions.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(14, 2, 'Electric Vehicles (EVs)', 'Encourage the adoption of electric vehicles by providing charging stations on campus and incentives for EV owners.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(15, 2, 'Alternative Fuels Education', 'Educate the campus community on the benefits of alternative fuels, such as biofuels, to decrease reliance on gasoline.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(16, 2, 'Fuel Consumption Tracking', 'Implement a tracking system to monitor fuel consumption and encourage departments to reduce their usage through efficiency measures.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(17, 2, 'Waste Reduction Programs', 'Launch initiatives focused on reducing waste generation, such as minimizing single-use plastics and encouraging reusable products.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(18, 2, 'Composting Initiatives', 'Set up composting stations for organic waste to divert waste from landfills and create nutrient-rich soil.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(19, 2, 'Recycling Programs', 'Enhance recycling programs on campus to increase participation and ensure proper segregation of recyclable materials.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(20, 2, 'E-Waste Collection Drives', 'Organize e-waste collection events to ensure proper disposal and recycling of electronic equipment.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(21, 2, 'Energy Efficiency Upgrades', 'Invest in energy-efficient lighting and appliances to reduce electricity consumption across campus.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(22, 2, 'Renewable Energy Integration', 'Explore options for integrating renewable energy sources, such as solar panels, to decrease reliance on non-renewable electricity.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(23, 2, 'Energy Audits', 'Conduct regular energy audits in buildings to identify inefficiencies and implement corrective measures.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(24, 2, 'Smart Building Technologies', 'Utilize smart technologies to optimize energy use in campus facilities, adjusting lighting and heating based on occupancy.', '2024-10-22 03:21:38', '2024-10-22 03:21:38'),
+(25, 3, 'Water Conservation Education', 'Implement educational programs to teach students and staff about water conservation techniques and the importance of reducing water usage.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(26, 3, 'Rainwater Harvesting', 'Install rainwater harvesting systems on campus buildings to collect and use rainwater for irrigation and other non-potable uses.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(27, 3, 'Water-Efficient Fixtures', 'Upgrade all campus facilities with water-efficient fixtures, such as low-flow faucets and toilets, to reduce overall water consumption.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(28, 3, 'Regular Leak Checks', 'Conduct regular inspections of all plumbing systems on campus to identify and repair leaks promptly, minimizing water waste.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(29, 3, 'Fuel-Efficient Transportation', 'Promote the use of fuel-efficient vehicles or electric buses for campus transportation to reduce gasoline consumption and emissions.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(30, 3, 'Carpooling Initiatives', 'Encourage carpooling among students and staff to decrease the number of vehicles on campus and lower fuel usage.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(31, 3, 'Biodiesel Usage', 'Switch to biodiesel or other alternative fuels for campus maintenance vehicles to reduce reliance on gasoline.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(32, 3, 'Regular Vehicle Maintenance', 'Ensure that all vehicles used on campus are regularly maintained for optimal fuel efficiency, reducing overall fuel consumption.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(33, 3, 'Energy-Efficient Lighting', 'Replace traditional lighting with energy-efficient LED bulbs in all campus buildings to significantly lower electricity consumption.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(34, 3, 'Smart Power Strips', 'Use smart power strips in campus facilities to reduce phantom energy loads and save electricity when devices are not in use.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(35, 3, 'Conduct Energy Audits', 'Perform energy audits on campus facilities to identify areas for energy savings and implement energy-efficient practices.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(36, 3, 'Renewable Energy Sources', 'Invest in renewable energy sources, such as solar panels, to generate electricity on campus and reduce reliance on non-renewable energy.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(37, 3, 'Waste Reduction Campaign', 'Launch a campus-wide campaign to promote waste reduction practices, encouraging recycling and composting among students and staff.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(38, 3, 'E-Waste Recycling Program', 'Establish a program for the proper disposal and recycling of electronic waste to minimize environmental impact.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(39, 3, 'Zero Waste Events', 'Organize events on campus that aim for zero waste by minimizing single-use items and encouraging the use of reusable products.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(40, 3, 'Composting Initiatives', 'Create composting stations on campus to divert organic waste from landfills and turn it into nutrient-rich compost for landscaping.', '2024-10-22 07:04:15', '2024-10-22 07:04:15'),
+(41, 4, 'Improve Fuel Efficiency', 'Encourage the use of fuel-efficient vehicles and regular maintenance to enhance fuel efficiency.', '2024-11-05 04:23:11', '2024-11-05 04:23:11'),
+(42, 4, 'Promote Carpooling', 'Establish carpool programs to reduce the number of vehicles on campus, lowering overall fuel consumption.', '2024-11-05 04:23:11', '2024-11-05 04:23:11'),
+(43, 4, 'Switch to Alternative Fuels', 'Implement the use of alternative fuels such as biofuels or electric vehicles to decrease reliance on gasoline.', '2024-11-05 04:23:11', '2024-11-05 04:23:11'),
+(44, 4, 'Conduct Fuel Consumption Audits', 'Regularly assess fuel consumption patterns and seek opportunities for reduction.', '2024-11-05 04:23:11', '2024-11-05 04:23:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `project_manager` varchar(255) NOT NULL,
+  `event_information` mediumtext DEFAULT NULL,
+  `photo` mediumtext DEFAULT NULL,
+  `sdg_name` varchar(255) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `department` varchar(425) DEFAULT NULL,
+  `sdg_approved` varchar(425) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `attachment` text DEFAULT NULL,
+  `date_start` date DEFAULT NULL,
+  `date_end` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `uploaded_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `title`, `project_manager`, `event_information`, `photo`, `sdg_name`, `comment`, `department`, `sdg_approved`, `status`, `attachment`, `date_start`, `date_end`, `created_at`, `updated_at`, `uploaded_by`) VALUES
+(1, 'asd', 'asdasdas', 'asd asd asd as', 'images/cb6d2316-02da-43fe-b2cc-82e88bd2c601.png', NULL, NULL, NULL, NULL, 2, NULL, '2024-10-12', '2024-10-20', '2024-10-12 06:15:45', '2024-10-18 21:28:31', 4),
+(2, 'Fasda', 'asdasd asd asd asd', 'sdf asd fasdf asdf asdf a fdas dfas df', 'images/cbc91ace-3755-4b69-9808-029af28c7297.jpg', NULL, NULL, NULL, NULL, 1, NULL, '2024-10-19', '2024-10-29', '2024-10-18 20:05:48', '2024-10-18 21:22:52', 4),
+(3, 'asdasasd', 'asdas asd a das das d', 'asd asdf sadf sadf', 'images/e485f762-0a32-49ab-929c-a18f1e188563.jpg', NULL, NULL, NULL, NULL, 2, NULL, '2024-10-19', '2024-10-20', '2024-10-18 21:30:16', '2024-10-18 21:30:25', 4),
+(4, 'Harnessing Technology for Achieving the Sustainable Development Goals (SDGs)', 'asd asd asd asd', 'This comprehensive course is designed to equip participants with the knowledge and skills to leverage technology to address global challenges and contribute towards achieving the United Nations Sustainable Development Goals (SDGs). Through a blend of theoretical insights and practical applications, participants will explore how digital solutions, data analytics, and emerging technologies can drive progress across various SDGs, including quality education, climate action, and sustainable cities.', 'images/884b1301-3b9f-4090-b64c-e54fc2dbce17.jpg', 'SDG 4: Quality Education', NULL, NULL, NULL, 2, NULL, '2024-10-20', '2024-10-22', '2024-10-20 02:26:59', '2024-10-20 12:23:41', 4),
+(5, 'fsafsf', 'alexis', 'dwqdQD', 'images/94df9d65-52ee-4090-8f63-c20bb8f06d2c.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 2, NULL, '2024-10-10', '2024-10-31', '2024-10-20 12:34:15', '2024-10-20 12:34:33', 4),
+(6, 'test', 'test', 'sd asd asd as', 'images/27be783f-5ae1-4f90-8fc3-b8f6febd683d.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-22', '2024-10-21 06:21:13', '2024-10-21 06:21:13', 4),
+(7, 'asd', 'asd', 'asdasdsad', 'images/402589ba-4552-42c0-83f3-fbadaa265be9.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-22', '2024-10-21 06:45:14', '2024-10-21 06:45:14', 4),
+(8, 'asdasd', 'asdas', 'asd asd asd', 'images/ad2be0e2-bd68-46ea-87ef-f0d920fa6b75.jpg', 'SDG 16: Peace, Justice, and Strong Institutions', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-21', '2024-10-21 06:53:35', '2024-10-21 06:53:35', 4),
+(9, 'asdas', 'as dasd', 'asdasd', 'images/4a196ece-5929-4c6d-b08a-ac7a731e19c5.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-22', '2024-10-21 06:54:35', '2024-10-21 06:54:35', 4),
+(10, 'adsasd', 'asdasd', 'asdasdasd', 'images/910f6bd2-e50f-4773-918f-b36b5f87c6e7.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-21', '2024-10-21 07:41:24', '2024-10-21 07:41:24', 4),
+(11, 'asdasd', 'asdasd', 'asdasdsa', 'images/623787a7-74ad-411c-b137-c6de40e28f76.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-21', '2024-10-21 07:42:26', '2024-10-21 07:42:26', 4),
+(12, 'asdasd', 'asdasd', 'asdasdasd', 'images/3dcef208-8657-4759-99cf-96e53957cecd.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-22', '2024-10-22', '2024-10-21 07:53:49', '2024-10-21 07:53:49', 4),
+(13, 'sadasd', 'asdasd', 'asdasdasd', 'images/3f583733-50c5-47f0-8e5e-500195d49822.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-21', '2024-10-21 07:55:15', '2024-10-21 07:55:15', 4),
+(14, 'adsasd', 'asdasdasd', 'asdasdasd', 'images/4d2386ce-60fc-4654-92e6-01cc377eac49.png', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-22', '2024-10-21 08:03:49', '2024-10-21 08:03:49', 4),
+(15, 'asdasdas', 'asdasd', 'adsasdads', 'images/783d42e2-352d-40b2-9363-98e23660ca66.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-22', '2024-10-21 08:12:46', '2024-10-21 08:12:46', 4),
+(16, 'asdasdasd as', 'daas', 'asdasdasd', 'images/8e29649e-03ac-47a9-938a-782602302ae9.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-21', '2024-10-24', '2024-10-21 08:22:46', '2024-10-21 08:22:46', 4),
+(17, 'Networkin', 'Joseph', 'Courses \r\nRelated to SDG: Quality Education', 'images/e11b90d7-f5b0-4b26-874f-5f96c19f8c6f.jpg', 'SDG 4: Quality Education', NULL, NULL, NULL, 0, NULL, '2024-10-18', '2024-10-19', '2024-10-21 08:34:13', '2024-10-21 08:34:13', 4),
+(18, 'political issues', 'kled', 'Political issues refer to matters that involve governance, policy-making, and the distribution of power within a society. These issues can affect citizens\' lives, influence public opinion, and shape national and international relations. Here are some key aspects of political issues:\r\n\r\nDefinition: Political issues are topics or problems that arise in the political sphere and require collective decision-making or action. They can encompass a wide range of subjects, including laws, regulations, social justice, economic policies, and international relations.\r\n\r\nTypes of Political Issues:\r\n\r\nSocial Issues: Topics related to societal norms and values, such as healthcare, education, and civil rights.\r\nEconomic Issues: Matters concerning the economy, including taxation, unemployment, trade policies, and welfare programs.\r\nEnvironmental Issues: Topics related to ecological sustainability, climate change, and resource management.\r\nForeign Policy Issues: Matters that pertain to a country\'s relationships with other nations, including diplomacy, military actions, and international treaties.\r\nGovernance Issues: Topics related to the functioning of government, such as electoral processes, corruption, and the rule of law.\r\nDebate and Discourse: Political issues often generate debate among various stakeholders, including politicians, interest groups, and the public. Different perspectives may lead to conflict or compromise, impacting legislation and policy outcomes.\r\n\r\nImpact on Society: The resolution of political issues can have significant implications for individuals and communities, influencing quality of life, access to resources, and overall social stability.\r\n\r\nExamples: Some contemporary political issues include immigration reform, gun control, healthcare reform, climate change legislation, voting rights, and economic inequality.', 'images/8d32878b-f06e-4c5f-9120-c60a041532bf.jpg', 'SDG 16: Peace, Justice, and Strong Institutions', NULL, NULL, 'SDG 16: Peace, Justice, and Strong Institutions', 2, NULL, '2024-10-21', '2024-10-31', '2024-10-21 14:10:54', '2024-10-21 15:51:18', 4),
+(19, 'political issues', 'gxgx', 'Political issues refer to matters that involve governance, policy-making, and the distribution of power within a society. These issues can affect citizens\' lives, influence public opinion, and shape national and international relations. Here are some key aspects of political issues: Definition: Political issues are topics or problems that arise in the political sphere and require collective decision-making or action. They can encompass a wide range of subjects, including laws, regulations, social justice, economic policies, and international relations. Types of Political Issues: Social Issues: Topics related to societal norms and values, such as healthcare, education, and civil rights. Economic Issues: Matters concerning the economy, including taxation, unemployment, trade policies, and welfare programs. Environmental Issues: Topics related to ecological sustainability, climate change, and resource management. Foreign Policy Issues: Matters that pertain to a country\'s relationships with other nations, including diplomacy, military actions, and international treaties. Governance Issues: Topics related to the functioning of government, such as electoral processes, corruption, and the rule of law. Debate and Discourse: Political issues often generate debate among various stakeholders, including politicians, interest groups, and the public. Different perspectives may lead to conflict or compromise, impacting legislation and policy outcomes. Impact on Society: The resolution of political issues can have significant implications for individuals and communities, influencing quality of life, access to resources, and overall social stability. Examples: Some contemporary political issues include immigration reform, gun control, healthcare reform, climate change legislation, voting rights, and economic inequality.', 'images/3ccff887-8a46-4b9a-b7d6-fec59a1b3f2c.png', 'SDG 16: Peace, Justice, and Strong Institutions', 'The selected SDG is \'SDG 16: Peace, Justice, and Strong Institutions\' because the event title \'political issues\' directly relates to governance, policy-making, and the distribution of power, which are key aspects of this goal. The event information emphasizes the importance of addressing political matters that impact citizens\' lives and national relations, aligning well with the objectives of promoting peace, justice, and strong institutions.', NULL, 'SDG 16: Peace, Justice, and Strong Institutions', 2, 'uploads/442fe800-b921-4f89-aa3b-291d76b9c366.pdf', '2024-10-21', '2024-10-21', '2024-10-21 15:51:54', '2024-10-21 15:52:52', 4),
+(20, 'Poveryt seminar', 'alexis', 'Poverty is about not having enough money to meet basic needs including food, clothing and shelter. However, poverty is more, much more than just not having enough money. The World Bank Organization describes poverty in this way: “Poverty is hunger.', 'images/27ed0adb-c89f-4904-90ca-df1a5ab6f311.jpg', 'SDG 1: No Poverty', 'The seminar titled \'Poverty seminar\' directly addresses issues related to poverty, aligning closely with SDG 1: No Poverty. The event\'s focus on poverty as a multifaceted issue that includes not only lack of income but also hunger, clothing, and shelter reinforces its connection to this specific goal. Additionally, the information provided highlights the broader implications of poverty, making SDG 1 the most relevant choice.', 'CABEIGHM', 'SDG 1: No Poverty', 2, 'uploads/382f5570-ab03-4421-ac0d-4ceb560c4de4.pdf', '2024-10-22', '2024-10-25', '2024-10-22 00:20:16', '2024-10-22 00:24:49', 4),
+(21, 'Politics', 'sam', 'Political issues refer to matters that involve governance, policy-making, and the distribution of power within a society. These issues can affect citizens\' lives, influence public opinion, and shape national and international relations.', 'images/f9f6e856-2da6-4085-9f36-635a7163ac96.jpg', 'SDG 16: Peace, Justice, and Strong Institutions', 'The event titled \'Politics\' relates closely to SDG 16: Peace, Justice, and Strong Institutions, as it addresses governance, policy-making, and the distribution of power within society. Political issues are fundamental to establishing strong institutions and ensuring justice, which aligns with the goals of SDG 16.', 'CTE', 'SDG 16: Peace, Justice, and Strong Institutions', 2, 'uploads/2bee1f4a-8ae3-4cc7-9544-8205e7dc8270.pdf', '2024-11-01', '2024-11-07', '2024-10-22 00:21:26', '2024-10-22 00:24:12', 4),
+(22, '5v5 esports', 'kled', 'esports game battle', 'images/8e85ff6a-2656-4dfd-9dbc-2aa73a66d27b.jpg', 'SDG 8: Decent Work and Economic Growth', 'The event \'5v5 esports\' falls under SDG 8: Decent Work and Economic Growth as esports can provide career opportunities, internships, and skill development in the growing gaming and technology industries. Additionally, it promotes fair employment practices and entrepreneurship through potential sponsorships and partnerships in the esports sector.', 'CICS', 'SDG 8: Decent Work and Economic Growth', 2, 'uploads/e57d8e09-6da8-4419-adb3-24c296b8340b.pdf', '2024-11-02', '2024-11-03', '2024-10-22 00:22:28', '2024-10-22 00:23:55', 4),
+(23, 'Climate Change Seminar', 'Sam Santos', 'Climate change', 'images/90f3b48e-da28-440e-a606-40ce9dd278c8.jpg', 'SDG 13: Climate Action', 'The seminar titled \'Climate Change Seminar\' directly aligns with SDG 13: Climate Action, which focuses on addressing climate change and its impacts. The event information emphasizes climate change, making it the most relevant goal as it encompasses initiatives for carbon footprint tracking, climate education, and adaptation and mitigation strategies.', 'CICS', NULL, 0, 'uploads/deec5b48-8d07-4327-9fae-eb3a397d4548.pdf', '2024-11-06', '2024-11-07', '2024-11-05 02:58:59', '2024-11-05 02:58:59', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `title` varchar(245) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `information` text DEFAULT NULL,
+  `photo` text DEFAULT NULL,
+  `attachment` text DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `date`, `information`, `photo`, `attachment`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Test', '2024-10-22', 'This is a test lorem ipsum dolor', 'images/37794d77-14b2-470f-a2fb-617c0db1fcc3.png', 'uploads/f1e7e606-8870-4357-b3c7-74043adfae7e.pdf', 5, '2024-10-21 22:55:28', '2024-10-21 22:55:28'),
+(2, 'e sports', '2024-10-24', 'esports 5v5', 'images/f400f354-313a-42f6-b449-a30913e4121a.jpg', 'uploads/c8c1ffb5-85f5-4e93-a971-1e5b7b8e8173.pptx', 5, '2024-10-22 00:03:10', '2024-10-22 00:03:10'),
+(3, 'SDG FESTIVAL', '2024-11-17', 'SASAD', 'images/f2d068e4-69bf-495d-ae6f-2ab6eaed3989.jpeg', 'uploads/a64dea64-6a77-422b-b2df-d4e877fbc58d.txt', 5, '2024-11-15 12:03:54', '2024-11-15 12:03:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedbacks`
+--
+
+CREATE TABLE `feedbacks` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `sdg` varchar(245) DEFAULT NULL,
+  `details` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `feedbacks`
+--
+
+INSERT INTO `feedbacks` (`id`, `user_id`, `sdg`, `details`, `created_at`, `updated_at`) VALUES
+(1, 3, 'SDG 2: Zero Hunger', 'Test', '2024-10-22 01:24:23', '2024-10-22 01:24:23'),
+(2, 2, 'SDG 1: No Poverty', 'May suggestion ako pwede tayo magkaroon charity event sa mga street children nangangailangan ng libreng kagamitan para sa skewlahan', '2024-10-22 06:20:34', '2024-10-22 06:20:34'),
+(3, 3, 'SDG 2: Zero Hunger', 'Suggestion ko magkaroon ng feeding program para sa mga scholars ng bsu malvar at low budget', '2024-10-22 06:24:57', '2024-10-22 06:24:57'),
+(4, 4, 'SDG 4: Quality Education', 'suggest na mayroong quality for other subjects', '2024-10-22 06:49:19', '2024-10-22 06:49:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2024_09_22_022558_create_carbon_footprint_table', 1),
+(6, '2024_09_30_032945_create_announcements_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` int(11) NOT NULL,
+  `uploaded_by` int(11) DEFAULT NULL,
+  `title` varchar(245) NOT NULL,
+  `project_manager` varchar(245) NOT NULL,
+  `event_information` mediumtext NOT NULL,
+  `photo` mediumtext DEFAULT NULL,
+  `sdg_name` varchar(255) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `department` varchar(425) DEFAULT NULL,
+  `sdg_approved` varchar(425) DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  `attachment` text DEFAULT NULL,
+  `date_start` date DEFAULT NULL,
+  `date_end` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `uploaded_by`, `title`, `project_manager`, `event_information`, `photo`, `sdg_name`, `comment`, `department`, `sdg_approved`, `status`, `attachment`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
+(1, 4, 'asdasdasd asd', 'asd', 'asd as dsadf asdf a asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf asd as dsadf asdf', 'images/a8a9c6f8-1c32-4b5c-aad0-a3d76e793254.jpg', NULL, NULL, NULL, NULL, 2, NULL, '2024-10-12', '2024-10-21', '2024-10-12 06:29:07', '2024-10-18 21:41:58'),
+(2, 4, 'asd asd as', 'dasdas', 'asd asd asd', 'images/a599f6b9-a3c8-4ec5-90f7-506d2299d2e6.jpg', NULL, NULL, NULL, NULL, 2, NULL, '2024-10-12', '2024-10-24', '2024-10-12 06:29:39', '2024-10-20 12:29:03'),
+(3, 4, 'asdasd', 'asdasdasd', 'asdasd', 'images/2a1d45b8-02d8-4011-9d69-83ea52832144.jpg', NULL, NULL, NULL, NULL, 1, NULL, '2024-10-12', '2024-10-08', '2024-10-12 06:29:56', '2024-10-18 21:42:02'),
+(4, 4, 'asd asd', 'IT Fair', 'The IT Fair 2024 is an exciting opportunity to explore how technology can be harnessed to achieve the Sustainable Development Goals. This event will bring together tech enthusiasts, innovators, and organizations to showcase cutting-edge solutions that address global challenges such as climate change, quality education, and sustainable cities. Attendees can engage with interactive exhibits, participate in workshops, and hear from experts about the role of information technology in shaping a sustainable future.', 'images/3d4efa50-a546-4141-8cc9-c62be77d0c3c.jpg', NULL, NULL, NULL, NULL, 1, NULL, '2024-10-20', '2024-10-21', '2024-10-20 02:18:14', '2024-10-20 12:28:32'),
+(5, 4, 'IT Fair', 'aasd as asd', 'The IT Fair 2024 is an exciting opportunity to explore how technology can be harnessed to achieve the Sustainable Development Goals. This event will bring together tech enthusiasts, innovators, and organizations to showcase cutting-edge solutions that address global challenges such as climate change, quality education, and sustainable cities. Attendees can engage with interactive exhibits, participate in workshops, and hear from experts about the role of information technology in shaping a sustainable future.', 'images/b8a33f2c-d2e7-47b9-ae02-18e2f03502b0.jpg', NULL, NULL, NULL, NULL, 0, NULL, '2024-10-20', '2024-10-22', '2024-10-20 02:19:54', '2024-10-20 02:19:54'),
+(6, 4, 'IT Fair', 'asd as da', 'The IT Fair 2024 is an exciting opportunity to explore how technology can be harnessed to achieve the Sustainable Development Goals. This event will bring together tech enthusiasts, innovators, and organizations to showcase cutting-edge solutions that address global challenges such as climate change, quality education, and sustainable cities. Attendees can engage with interactive exhibits, participate in workshops, and hear from experts about the role of information technology in shaping a sustainable future.', 'images/4557e160-9335-4289-88bf-0ef4ca854f8f.jpg', 'SDG 9: Industry, Innovation, and Infrastructure', NULL, NULL, NULL, 0, NULL, '2024-10-20', '2024-10-23', '2024-10-20 02:20:35', '2024-10-20 02:20:35'),
+(7, 4, 'IT Fair at Campus', 'aad a dasd', 'The IT Fair 2024 is an exciting opportunity to explore how technology can be harnessed to achieve the Sustainable Development Goals. This event will bring together tech enthusiasts, innovators, and organizations to showcase cutting-edge solutions that address global challenges such as climate change, quality education, and sustainable cities. Attendees can engage with interactive exhibits, participate in workshops, and hear from experts about the role of information technology in shaping a sustainable future.', 'images/7e0bd091-3cc3-4ac4-91f8-b6bb877e7240.jpg', 'SDG 9: Industry, Innovation, and Infrastructure', NULL, NULL, NULL, 0, NULL, '2024-10-20', '2024-10-23', '2024-10-20 02:21:09', '2024-10-20 02:21:09'),
+(8, 5, 'oplan valo', 'alexis', 'bang bang', 'images/02e5db3a-ca8a-4912-b2e3-5a0905962557.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 1, NULL, '2024-10-20', '2024-10-25', '2024-10-20 12:29:50', '2024-10-20 12:30:17'),
+(9, 4, 'SagipKalusugan Fooding Program', 'John Felipe C. Dimayuga', 'Ang Sagip Kalusugan ay isang health program na itinatag sa Pilipinas upang magbigay ng libre o abot-kayang serbisyong pangkalusugan sa mga mahihirap at nangangailangang sektor ng lipunan. Isa itong bahagi ng mga proyektong nagbibigay ng access sa medikal na serbisyo, gamot, at iba pang pangangailangan sa kalusugan, lalo na para sa mga komunidad na may limitadong resources. Ang programang ito ay karaniwang pinapatakbo ng mga lokal na pamahalaan, non-government organizations (NGOs), o sa pakikipagtulungan ng pribadong sektor, layunin nitong masiguro ang mas malawak na access sa basic health services.\r\n\r\nEvent Place : Front of CICS Building\r\nTime: 10:00 am to 3:00 pm\r\nSDG: Zero Hunger', 'images/d08924a2-454d-4d22-b2fa-15ac1f072da3.png', 'SDG 2: Zero Hunger', NULL, NULL, NULL, 0, NULL, '2024-10-22', '2024-10-23', '2024-10-21 05:45:04', '2024-10-21 05:45:04'),
+(10, 4, 'Sagipbuhay Fooding Program', 'Maria Terista', 'Ang Sagip Kalusugan ay isang health program na itinatag sa Pilipinas upang magbigay ng libre o abot-kayang serbisyong pangkalusugan sa mga mahihirap at nangangailangang sektor ng lipunan. Isa itong bahagi ng mga proyektong nagbibigay ng access sa medikal na serbisyo, gamot, at iba pang pangangailangan sa kalusugan, lalo na para sa mga komunidad na may limitadong resources.\r\n\r\nAng programang ito ay karaniwang pinapatakbo ng mga lokal na pamahalaan, non-government organizations (NGOs), o sa pakikipagtulungan ng pribadong sektor, layunin nitong masiguro ang mas malawak na access sa basic health services\r\n\r\nEvent place: CABEIHM building 1st floor\r\nTime: 9:00am to 10:00 pm\r\nSDG: Food Hunger', 'images/d805c0b0-340e-4e25-8e50-5360c023809f.jpg', 'SDG 2: Zero Hunger', NULL, NULL, 'SDG 2: Zero Hunger', 2, NULL, '2024-10-23', '2024-10-24', '2024-10-21 05:50:51', '2024-10-21 16:05:15'),
+(11, 4, 'asaasa', 'alexis', 'asdlasdkas ajsdkj salkdjsalkjd laskdasdsadasdas', 'images/82bab539-0083-4722-90d4-f3050bbc2257.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-02-15', '2024-02-20', '2024-10-21 06:28:17', '2024-10-21 06:28:17'),
+(12, 4, 'Sustainability Science', 'mMmMMMA', 'Sustainability Science probes interactions between global, social, and human systems, the complex mechanisms that lead to degradation of these systems, and concomitant risks to human well-being', 'images/8be4c080-321c-4b58-9f69-3dc04d897ddc.jpg', 'SDG 4: Quality Education', NULL, NULL, NULL, 0, NULL, '2025-03-14', '2025-03-20', '2024-10-21 06:30:59', '2024-10-21 06:30:59'),
+(13, 4, 'blabalal', 'asdsadsadsa', 'This special webpage presents publications related to the High-level Political Forum on Sustainable Development (HLPF), which as the main United Nations platform on sustainable development, is dedicated to the follow-up and review of the 2030 Agenda', 'images/5377af97-4c62-4ba1-84b4-6c9e02230746.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2025-03-15', '2025-03-20', '2024-10-21 06:33:02', '2024-10-21 06:33:02'),
+(14, 4, 'asdasd', 'asd', 'dasdasd', 'images/67ab5ad9-38a2-4b80-92ac-39a8b229afb7.jpg', 'SDG 17: Partnerships for the Goals', NULL, NULL, NULL, 0, NULL, '2024-10-22', '2024-10-22', '2024-10-21 07:35:18', '2024-10-21 07:35:18'),
+(15, 4, 'valorant', 'alexis', 'game dev', 'images/4169a9d7-6feb-4a9f-a1f0-84d930e98fd0.jpg', 'SDG 4: Quality Education', NULL, NULL, 'SDG 4: Quality Education', 2, NULL, '2024-10-21', '2024-10-30', '2024-10-21 08:26:42', '2024-10-21 16:05:04'),
+(16, 4, 'agip Kalusugan', 'aasdasd', 'Ang Sagip Kalusugan ay isang health program na itinatag sa Pilipinas upang magbigay ng libre o abot-kayang serbisyong pangkalusugan sa mga mahihirap at nangangailangang sektor ng lipunan. Isa itong bahagi ng mga proyektong nagbibigay ng access sa medikal na serbisyo, gamot, at iba pang pangangailangan sa kalusugan, lalo na para sa mga komunidad na may limitadong resources. Ang programang ito ay karaniwang pinapatakbo ng mga lokal na pamahalaan, non-government organizations (NGOs), o sa pakikipagtulungan ng pribadong sektor, layunin nitong masiguro ang mas malawak na access sa basic health services Event place: CABEIHM building 1st floor Time: 9:00am to 10:00 pm SDG: Food Hunger', 'images/80c33937-2a7b-42a1-bd00-cf960afa92ab.jpg', 'SDG 2: Zero Hunger', 'The event \'Sagip Kalusugan\' focuses on providing health services to underprivileged communities, which aligns with SDG 2: Zero Hunger. This goal emphasizes food security and access to nutrition, which are critical components of health and well-being. The program\'s aim to offer medical services and support to those in need directly contributes to addressing hunger and health disparities in the community.', NULL, 'SDG 2: Zero Hunger', 2, 'uploads/51a6c4c3-df7b-47b5-a600-1c932ff5036d.pdf', '2024-10-21', '2024-10-20', '2024-10-21 15:41:23', '2024-10-21 15:55:09'),
+(17, 4, 'tree palnting', 'aprilyn', 'Tree planting is the process of transplanting tree seedlings, generally for forestry, land reclamation, or landscaping purposes. It differs from the transplantation of larger trees in arboriculture and from the lower-cost but slower and less reliable distribution of tree seeds.', 'images/ae6f06f3-c330-40d1-b1dd-37d5a735b3e3.jpg', 'SDG 15: Life on Land', 'The project \'tree planting\' directly aligns with SDG 15: Life on Land, as it focuses on biodiversity conservation and actively engages in reforestation and afforestation activities. The initiative aims to enhance local flora and fauna, contributing to the preservation of ecosystems.', 'CAS', 'SDG 15: Life on Land', 2, 'uploads/22fff3c5-97b1-4701-a04a-48615925ad9b.pdf', '2024-11-09', '2024-11-12', '2024-10-22 00:34:56', '2024-10-22 00:35:54'),
+(18, 4, 'More girls are out of school Event Equality', 'Jose D. Mangubat', 'Gender Equality Event', 'images/d1c62154-19ed-4fca-bb78-5afff9f587df.jpeg', 'SDG 5: Gender Equality', 'The event titled \'More girls are out of school Event Equality\' directly relates to SDG 5: Gender Equality, which focuses on ensuring equal opportunities for all genders and addressing issues like gender discrimination. The event aims to promote gender equality and support girls\' education, aligning perfectly with the goals of SDG 5.', 'CABEIGHM', 'SDG 5: Gender Equality', 2, 'uploads/42b72235-67a1-4103-a719-0e802933b4c3.docx', '2024-10-11', '2024-10-12', '2024-10-22 03:18:07', '2024-10-22 03:19:33'),
+(19, 4, 'Plastic Waste Recycling Program', 'Rodridgo V. Boneventor', 'CICS New building\r\n7:00 am to 4:00 pm', 'images/0f42046e-37b6-4efd-b76c-2e044dc75d69.jpeg', 'SDG 12: Responsible Consumption and Production', 'The Plastic Waste Recycling Program aligns closely with SDG 12: Responsible Consumption and Production, as it focuses on recycling and waste management, promoting sustainable practices related to plastic waste reduction on campus.', 'CICS', 'SDG 6: Clean Water and Sanitation', 2, 'uploads/41618a50-aaf4-4805-bd24-b473f99649ea.docx', '2024-10-04', '2024-10-05', '2024-10-22 06:35:51', '2024-11-17 14:55:20'),
+(20, 4, 'water recycling program', 'Jose B. Mendoza', '6:00 am to 8:00pm\r\nCICS 1st floor', 'images/790ba867-7ca7-42ff-98c9-daaab0a1ed06.jpeg', 'SDG 6: Clean Water and Sanitation', 'The project \'water recycling program\' directly relates to SDG 6: Clean Water and Sanitation, which focuses on water conservation and ensuring access to clean water. The event aims to implement practices that promote water-saving technologies, aligning with the objectives of this SDG.', 'CICS', 'SDG 6: Clean Water and Sanitation', 2, 'uploads/93573b4d-1c79-4397-8084-36bea444071b.docx', '2024-10-05', '2024-10-06', '2024-10-22 06:43:45', '2024-11-05 03:26:04'),
+(21, 4, 'Tree Planting Drive', 'Sam Santos', 'tree planting', 'images/07d417dc-2435-46a7-aaae-5261079dfcb8.jpg', 'SDG 15: Life on Land', 'The chosen SDG is SDG 15: Life on Land, as the Tree Planting Drive directly aligns with efforts to engage in reforestation and afforestation activities, which are essential for preserving local flora and fauna.', 'CICS', 'SDG 5: Gender Equality', 2, 'uploads/c0e09eac-beda-44dd-88ca-5c0bc97670e2.xlsx', '2024-11-05', '2024-11-06', '2024-11-05 02:54:28', '2024-11-05 03:05:33'),
+(22, 4, 'Cyber Security Awareness Seminar', 'Sam', '8:00 am to 5:00 pm\r\nCICS Student Building', 'images/85eebd2b-8cc7-4ba7-bd7f-6b24e8ec0235.jpg', 'SDG 13: Climate Action', 'The \'Cyber Security Awareness Seminar\' focuses on educating participants about cybersecurity issues, which is integral to fostering a more resilient digital environment. This aligns closely with \'SDG 13: Climate Action\' as it emphasizes the importance of education and awareness in addressing global challenges, including those related to technology and its impact on society.', 'CICS', NULL, 1, 'uploads/d44130c0-ee4a-4d40-9e2b-7a701aea6568.pdf', '2024-11-07', '2024-11-07', '2024-11-05 03:15:28', '2024-11-05 03:22:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sdgreport`
+--
+
+CREATE TABLE `sdgreport` (
+  `id` int(11) NOT NULL,
+  `topSdgCourse` text DEFAULT NULL,
+  `department` text DEFAULT NULL,
+  `leastFiveSdgs` text DEFAULT NULL,
+  `sdgResults` text DEFAULT NULL,
+  `currentMonthName` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sdgreport`
+--
+
+INSERT INTO `sdgreport` (`id`, `topSdgCourse`, `department`, `leastFiveSdgs`, `sdgResults`, `currentMonthName`, `created_at`, `updated_at`) VALUES
+(1, '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"3\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 15: Life on Land\",\"total_count\":\"1\"}]', '{\"ICTC\":0,\"CICS\":1,\"CABEIGHM\":1,\"CAS\":1,\"CTE\":1}', '[{\"title\":\"SDG 3: Good Health and Well-being\",\"details\":{\"header_detail_1\":\"Mental Health Services:\",\"detail_1\":\"Are there accessible mental health resources for students and staff?\",\"header_detail_2\":\"Physical Activity Opportunities:\",\"detail_2\":\"Are there sports or fitness facilities available?\",\"header_detail_3\":\"Health Promotion:\",\"detail_3\":\"Are there regular health checkups, vaccination drives, or awareness programs?\"},\"count\":0},{\"title\":\"SDG 5: Gender Equality\",\"details\":{\"header_detail_1\":\"Equal Opportunities:\",\"detail_1\":\"Are there equal opportunities for all genders in leadership, scholarships, and hiring?\",\"header_detail_2\":\"Support Systems:\",\"detail_2\":\"Are there support groups or policies to combat gender discrimination or harassment?\",\"header_detail_3\":\"Gender Awareness Programs:\",\"detail_3\":\"Does the university run awareness programs to promote gender equality?\"},\"count\":0},{\"title\":\"SDG 6: Clean Water and Sanitation\",\"details\":{\"header_detail_1\":\"Water Conservation:\",\"detail_1\":\"Are there water-saving technologies or practices implemented on campus?\",\"header_detail_2\":\"Access to Clean Water:\",\"detail_2\":\"Is safe drinking water readily available for all students and staff?\",\"header_detail_3\":\"Sanitation Facilities:\",\"detail_3\":\"Are sanitation facilities adequate and accessible?\"},\"count\":0},{\"title\":\"SDG 7: Affordable and Clean Energy\",\"details\":{\"header_detail_1\":\"Renewable Energy Use:\",\"detail_1\":\"Does the university use renewable energy sources (solar, wind, etc.)?\",\"header_detail_2\":\"Energy Efficiency Programs:\",\"detail_2\":\"Are there measures in place to reduce energy consumption?\",\"header_detail_3\":\"Energy Awareness Campaigns:\",\"detail_3\":\"Are there awareness campaigns about energy-saving practices?\"},\"count\":0}]', '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"}]', 'October', '2024-10-22 02:52:31', '2024-10-22 02:52:31'),
+(2, '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"3\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 15: Life on Land\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 8: Decent Work and Economic Growth\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"}]', '{\"ICTC\":0,\"CICS\":1,\"CABEIGHM\":1,\"CAS\":1,\"CTE\":1}', '[{\"title\":\"SDG 3: Good Health and Well-being\",\"details\":{\"header_detail_1\":\"Mental Health Services:\",\"detail_1\":\"Are there accessible mental health resources for students and staff?\",\"header_detail_2\":\"Physical Activity Opportunities:\",\"detail_2\":\"Are there sports or fitness facilities available?\",\"header_detail_3\":\"Health Promotion:\",\"detail_3\":\"Are there regular health checkups, vaccination drives, or awareness programs?\"},\"count\":0},{\"title\":\"SDG 5: Gender Equality\",\"details\":{\"header_detail_1\":\"Equal Opportunities:\",\"detail_1\":\"Are there equal opportunities for all genders in leadership, scholarships, and hiring?\",\"header_detail_2\":\"Support Systems:\",\"detail_2\":\"Are there support groups or policies to combat gender discrimination or harassment?\",\"header_detail_3\":\"Gender Awareness Programs:\",\"detail_3\":\"Does the university run awareness programs to promote gender equality?\"},\"count\":0},{\"title\":\"SDG 6: Clean Water and Sanitation\",\"details\":{\"header_detail_1\":\"Water Conservation:\",\"detail_1\":\"Are there water-saving technologies or practices implemented on campus?\",\"header_detail_2\":\"Access to Clean Water:\",\"detail_2\":\"Is safe drinking water readily available for all students and staff?\",\"header_detail_3\":\"Sanitation Facilities:\",\"detail_3\":\"Are sanitation facilities adequate and accessible?\"},\"count\":0},{\"title\":\"SDG 7: Affordable and Clean Energy\",\"details\":{\"header_detail_1\":\"Renewable Energy Use:\",\"detail_1\":\"Does the university use renewable energy sources (solar, wind, etc.)?\",\"header_detail_2\":\"Energy Efficiency Programs:\",\"detail_2\":\"Are there measures in place to reduce energy consumption?\",\"header_detail_3\":\"Energy Awareness Campaigns:\",\"detail_3\":\"Are there awareness campaigns about energy-saving practices?\"},\"count\":0}]', '[{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"}]', 'October', '2024-10-22 02:59:42', '2024-10-22 02:59:42'),
+(3, '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"3\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 8: Decent Work and Economic Growth\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"}]', '{\"ICTC\":0,\"CICS\":1,\"CABEIGHM\":2,\"CAS\":1,\"CTE\":1}', '[{\"title\":\"SDG 3: Good Health and Well-being\",\"details\":{\"header_detail_1\":\"Mental Health Services:\",\"detail_1\":\"Are there accessible mental health resources for students and staff?\",\"header_detail_2\":\"Physical Activity Opportunities:\",\"detail_2\":\"Are there sports or fitness facilities available?\",\"header_detail_3\":\"Health Promotion:\",\"detail_3\":\"Are there regular health checkups, vaccination drives, or awareness programs?\"},\"count\":0},{\"title\":\"SDG 6: Clean Water and Sanitation\",\"details\":{\"header_detail_1\":\"Water Conservation:\",\"detail_1\":\"Are there water-saving technologies or practices implemented on campus?\",\"header_detail_2\":\"Access to Clean Water:\",\"detail_2\":\"Is safe drinking water readily available for all students and staff?\",\"header_detail_3\":\"Sanitation Facilities:\",\"detail_3\":\"Are sanitation facilities adequate and accessible?\"},\"count\":0},{\"title\":\"SDG 7: Affordable and Clean Energy\",\"details\":{\"header_detail_1\":\"Renewable Energy Use:\",\"detail_1\":\"Does the university use renewable energy sources (solar, wind, etc.)?\",\"header_detail_2\":\"Energy Efficiency Programs:\",\"detail_2\":\"Are there measures in place to reduce energy consumption?\",\"header_detail_3\":\"Energy Awareness Campaigns:\",\"detail_3\":\"Are there awareness campaigns about energy-saving practices?\"},\"count\":0},{\"title\":\"SDG 9: Industry, Innovation, and Infrastructure\",\"details\":{\"header_detail_1\":\"Sustainable Buildings:\",\"detail_1\":\"Are buildings designed or renovated for sustainability (e.g., green certifications)?\",\"header_detail_2\":\"Research in Technology and Sustainability:\",\"detail_2\":\"Is there investment in sustainable technology research?\",\"header_detail_3\":\"Infrastructure for Learning:\",\"detail_3\":\"Is there adequate infrastructure to support quality education (labs, libraries, etc.)?\"},\"count\":0}]', '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"}]', 'October', '2024-10-22 03:22:36', '2024-10-22 03:22:36'),
+(4, '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"3\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 8: Decent Work and Economic Growth\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"}]', '{\"ICTC\":0,\"CICS\":1,\"CABEIGHM\":2,\"CAS\":1,\"CTE\":1}', '[{\"title\":\"SDG 3: Good Health and Well-being\",\"details\":{\"header_detail_1\":\"Mental Health Services:\",\"detail_1\":\"Are there accessible mental health resources for students and staff?\",\"header_detail_2\":\"Physical Activity Opportunities:\",\"detail_2\":\"Are there sports or fitness facilities available?\",\"header_detail_3\":\"Health Promotion:\",\"detail_3\":\"Are there regular health checkups, vaccination drives, or awareness programs?\"},\"count\":0},{\"title\":\"SDG 6: Clean Water and Sanitation\",\"details\":{\"header_detail_1\":\"Water Conservation:\",\"detail_1\":\"Are there water-saving technologies or practices implemented on campus?\",\"header_detail_2\":\"Access to Clean Water:\",\"detail_2\":\"Is safe drinking water readily available for all students and staff?\",\"header_detail_3\":\"Sanitation Facilities:\",\"detail_3\":\"Are sanitation facilities adequate and accessible?\"},\"count\":0},{\"title\":\"SDG 7: Affordable and Clean Energy\",\"details\":{\"header_detail_1\":\"Renewable Energy Use:\",\"detail_1\":\"Does the university use renewable energy sources (solar, wind, etc.)?\",\"header_detail_2\":\"Energy Efficiency Programs:\",\"detail_2\":\"Are there measures in place to reduce energy consumption?\",\"header_detail_3\":\"Energy Awareness Campaigns:\",\"detail_3\":\"Are there awareness campaigns about energy-saving practices?\"},\"count\":0},{\"title\":\"SDG 9: Industry, Innovation, and Infrastructure\",\"details\":{\"header_detail_1\":\"Sustainable Buildings:\",\"detail_1\":\"Are buildings designed or renovated for sustainability (e.g., green certifications)?\",\"header_detail_2\":\"Research in Technology and Sustainability:\",\"detail_2\":\"Is there investment in sustainable technology research?\",\"header_detail_3\":\"Infrastructure for Learning:\",\"detail_3\":\"Is there adequate infrastructure to support quality education (labs, libraries, etc.)?\"},\"count\":0}]', '[{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"}]', 'October', '2024-10-22 04:08:54', '2024-10-22 04:08:54'),
+(5, '[{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"3\"},{\"sdg_approved\":\"SDG 2: Zero Hunger\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"2\"},{\"sdg_approved\":\"SDG 1: No Poverty\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 4: Quality Education\",\"total_count\":\"1\"}]', '{\"ICTC\":0,\"CICS\":3,\"CABEIGHM\":2,\"CAS\":1,\"CTE\":1}', '[{\"title\":\"SDG 3: Good Health and Well-being\",\"details\":{\"header_detail_1\":\"Mental Health Services:\",\"detail_1\":\"Are there accessible mental health resources for students and staff?\",\"header_detail_2\":\"Physical Activity Opportunities:\",\"detail_2\":\"Are there sports or fitness facilities available?\",\"header_detail_3\":\"Health Promotion:\",\"detail_3\":\"Are there regular health checkups, vaccination drives, or awareness programs?\"},\"count\":0},{\"title\":\"SDG 7: Affordable and Clean Energy\",\"details\":{\"header_detail_1\":\"Renewable Energy Use:\",\"detail_1\":\"Does the university use renewable energy sources (solar, wind, etc.)?\",\"header_detail_2\":\"Energy Efficiency Programs:\",\"detail_2\":\"Are there measures in place to reduce energy consumption?\",\"header_detail_3\":\"Energy Awareness Campaigns:\",\"detail_3\":\"Are there awareness campaigns about energy-saving practices?\"},\"count\":0},{\"title\":\"SDG 9: Industry, Innovation, and Infrastructure\",\"details\":{\"header_detail_1\":\"Sustainable Buildings:\",\"detail_1\":\"Are buildings designed or renovated for sustainability (e.g., green certifications)?\",\"header_detail_2\":\"Research in Technology and Sustainability:\",\"detail_2\":\"Is there investment in sustainable technology research?\",\"header_detail_3\":\"Infrastructure for Learning:\",\"detail_3\":\"Is there adequate infrastructure to support quality education (labs, libraries, etc.)?\"},\"count\":0},{\"title\":\"SDG 10: Reduced Inequality\",\"details\":{\"header_detail_1\":\"Inclusive Policies:\",\"detail_1\":\"Are there policies ensuring inclusivity for students with disabilities, minorities, and marginalized groups?\",\"header_detail_2\":\"Social Mobility Programs:\",\"detail_2\":\"Are there initiatives to support students from disadvantaged backgrounds?\",\"header_detail_3\":\"Anti-discrimination Measures:\",\"detail_3\":\"Are anti-discrimination policies actively enforced?\"},\"count\":0}]', '[{\"sdg_approved\":\"SDG 8: Decent Work and Economic Growth\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 16: Peace, Justice, and Strong Institutions\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 5: Gender Equality\",\"total_count\":\"1\"},{\"sdg_approved\":\"SDG 15: Life on Land\",\"total_count\":\"1\"}]', 'November', '2024-11-05 04:15:44', '2024-11-05 04:15:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sdg_criterias`
+--
+
+CREATE TABLE `sdg_criterias` (
+  `id` int(11) NOT NULL,
+  `title` varchar(245) DEFAULT NULL,
+  `header_detail_1` varchar(245) DEFAULT NULL,
+  `detail_1` text DEFAULT NULL,
+  `header_detail_2` varchar(245) DEFAULT NULL,
+  `detail_2` text DEFAULT NULL,
+  `header_detail_3` varchar(245) DEFAULT NULL,
+  `detail_3` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sdg_criterias`
+--
+
+INSERT INTO `sdg_criterias` (`id`, `title`, `header_detail_1`, `detail_1`, `header_detail_2`, `detail_2`, `header_detail_3`, `detail_3`) VALUES
+(1, 'SDG 1: No Poverty', 'Scholarship Programs:', 'Does the university offer scholarships or financial aid for underprivileged students?', 'Support Services:', 'Are there support services for low-income students (e.g., free meals, financial advice)?', 'Community Outreach:', 'Are there university initiatives addressing local poverty?'),
+(2, 'SDG 2: Zero Hunger', 'Food Security Programs:', 'Are there programs ensuring students and staff have access to affordable and nutritious food?', 'Food Waste Management:', ' Is there a food waste reduction program in place (e.g., composting, food donations)?', 'Local Sourcing:', 'Does the university source food from local or sustainable sources?'),
+(3, 'SDG 3: Good Health and Well-being', 'Mental Health Services:', 'Are there accessible mental health resources for students and staff?', 'Physical Activity Opportunities:', 'Are there sports or fitness facilities available?', 'Health Promotion:', 'Are there regular health checkups, vaccination drives, or awareness programs?'),
+(4, 'SDG 4: Quality Education', 'Inclusive Education:', ' Are there programs for students from different backgrounds, including special education?', 'Research and Innovation:', 'Is there a focus on research in sustainability-related topics?', 'Life-long Learning:', 'Are there courses or workshops for continued learning and professional development?'),
+(5, 'SDG 5: Gender Equality', 'Equal Opportunities:', ' Are there equal opportunities for all genders in leadership, scholarships, and hiring?', 'Support Systems:', 'Are there support groups or policies to combat gender discrimination or harassment?', 'Gender Awareness Programs:', 'Does the university run awareness programs to promote gender equality?'),
+(6, 'SDG 6: Clean Water and Sanitation', 'Water Conservation:', 'Are there water-saving technologies or practices implemented on campus?', 'Access to Clean Water:', 'Is safe drinking water readily available for all students and staff?', 'Sanitation Facilities:', 'Are sanitation facilities adequate and accessible?'),
+(7, 'SDG 7: Affordable and Clean Energy', 'Renewable Energy Use:', ' Does the university use renewable energy sources (solar, wind, etc.)?', 'Energy Efficiency Programs:', 'Are there measures in place to reduce energy consumption?', 'Energy Awareness Campaigns:', 'Are there awareness campaigns about energy-saving practices?'),
+(8, 'SDG 8: Decent Work and Economic Growth', 'Fair Employment Practices:', 'Are fair wages and decent working conditions provided for all employees?', 'Internship and Career Opportunities:', 'Are there internship programs or career support services for students?', 'Entrepreneurship Support:', ' Does the university encourage startups or innovation projects?'),
+(9, 'SDG 9: Industry, Innovation, and Infrastructure', 'Sustainable Buildings:', ' Are buildings designed or renovated for sustainability (e.g., green certifications)?', 'Research in Technology and Sustainability:', ' Is there investment in sustainable technology research?', ' Infrastructure for Learning:', 'Is there adequate infrastructure to support quality education (labs, libraries, etc.)?'),
+(10, 'SDG 10: Reduced Inequality', 'Inclusive Policies:', ' Are there policies ensuring inclusivity for students with disabilities, minorities, and marginalized groups?', 'Social Mobility Programs:', 'Are there initiatives to support students from disadvantaged backgrounds?', 'Anti-discrimination Measures:', 'Are anti-discrimination policies actively enforced?'),
+(11, 'SDG 11: Sustainable Cities and Communities', 'Sustainable Campus Development:', ' Is the campus designed with sustainable practices (e.g., green spaces, public transport access)?', 'Cultural Programs:', 'Are there events promoting local culture and heritage?', 'Disaster Preparedness:', ' Does the university have a disaster preparedness plan in place?'),
+(12, 'SDG 12: Responsible Consumption and Production', 'Waste Management:', 'Are there recycling and waste reduction programs on campus?', 'Sustainable Procurement:', 'Does the university prioritize sustainable and ethically', 'Awareness Programs:', 'Are there programs to educate students and staff about sustainable consumption?'),
+(13, 'SDG 13: Climate Action', 'Carbon Footprint Tracking:', 'Does the university track its greenhouse gas emissions?', 'Climate Education:', 'Are there programs to educate the university community about climate change?', 'Adaptation and Mitigation Strategies:', 'Are there plans to mitigate the impacts of climate change?'),
+(14, 'SDG 14: Life Below Water', 'Water Quality Protection:', 'Are there initiatives to protect local water bodies from pollution?', 'Marine Research:', ' Is the university involved in research or projects related to marine conservation?', 'Awareness Campaigns:', 'Are there programs to raise awareness about marine ecosystems?'),
+(15, 'SDG 15: Life on Land', 'Biodiversity Conservation:', 'Are there efforts to preserve local flora and fauna on campus?', 'Tree Planting Initiatives:', 'Does the university engage in reforestation or afforestation activities?', 'Habitat Restoration Projects:', 'Are there programs to restore natural habitats on or near campus?'),
+(16, 'SDG 16: Peace, Justice, and Strong Institutions', 'Governance Policies:', 'Are governance practices transparent and fair?', 'Student Rights and Advocacy:', ' Are there platforms for students to voice concerns or advocate for their rights?', 'Anti-corruption Measures:', 'Are anti-corruption policies in place and actively enforced?'),
+(17, 'SDG 17: Partnerships for the Goals', 'Collaborations:', 'Does the university collaborate with other institutions, NGOs, or companies for sustainable development?', 'Global Awareness:', 'Are there programs to raise awareness about the SDGs?', 'Community Engagement:', ' Is the university actively involved in local community development?');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'Admin', 'admin@gmail.com', NULL, '$2y$12$M4eTOaU27riNiUpNiKsmbOQ/iFyYYI15ezZE8tCqbVfqCF2r9SLP6', 1, NULL, '2024-09-04 22:32:55', '2024-10-22 03:18:17'),
+(2, 'EMU', 'EMU', 'emu@gmail.com', NULL, '$2y$12$y9v5iA/2WTaG1AjVOjF.hueFxU2ih6PQo.QeUbFRzsRUpOlCT/U0a', 5, NULL, '2024-09-04 22:32:55', '2024-09-04 22:32:55'),
+(3, 'GSO', 'GSO', 'gso@gmail.com', NULL, '$2y$12$tUE4knK4CB6aNYzxD/r8teVeMmh8NGoNFA3WoLg3cTFyekL.TP9LW', 6, NULL, '2024-09-04 22:32:55', '2024-09-04 22:32:55'),
+(4, 'SDG', 'Coor', 'coor@gmail.com', NULL, '$2y$12$VOpZSwOE6yr3pF0OwdqRBe14.jYl3fH1L.y3Dbrk7KAGdhTTMhxbC', 4, NULL, '2024-10-11 22:47:38', '2024-10-11 22:47:38'),
+(5, 'sdg', 'sec', 'sec@gmail.com', NULL, '$2y$12$YL4yKIUjBLTVc/HuPczfPOXZJZqjijs9vfOaB463vpOYs.etnlsEG', 3, NULL, '2024-10-12 06:32:16', '2024-10-12 06:32:16'),
+(6, 'Head', 'SDG', 'Head@gmail.com', NULL, '$2y$12$7hFqp/zFmVxY3Gh15bl7RuwmmNduPZ9U4fSGURLdTH1yKuMvnDtie', 2, NULL, '2024-10-22 00:15:25', '2024-10-26 03:39:44');
+
+CREATE TABLE `fuel_consumption` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `campus` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `driver` varchar(255) DEFAULT NULL,
+  `vehicle` varchar(255) DEFAULT NULL,
+  `plate_no` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `fuel_type` varchar(255) DEFAULT NULL,
+  `item_description` varchar(255) DEFAULT NULL,
+  `transaction_no` varchar(255) DEFAULT NULL,
+  `odometer` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `prev_reading` varchar(255) DEFAULT NULL,
+  `quarter` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `annually` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `semi_annually` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `water_consumption` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `campus` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `prev_reading` varchar(255) DEFAULT NULL,
+  `current_reading` varchar(255) DEFAULT NULL,
+  `consumption_cubic` varchar(255) DEFAULT NULL,
+  `consumption_liter` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `quarter` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `semi_annually` varchar(255) DEFAULT NULL,
+  `annually` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `electricity` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `campus` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `quarter` varchar(255) DEFAULT NULL,
+  `annually` varchar(255) DEFAULT NULL,
+  `semi_annually` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `prev_reading` varchar(255) DEFAULT NULL,
+  `current_reading` varchar(255) DEFAULT NULL,
+  `consumption` varchar(255) DEFAULT NULL,
+  `multiplier` varchar(255) DEFAULT NULL,
+  `total_consumption` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `solid_waste` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `campus` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `prev_reading` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `waste_type` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `annually` varchar(255) DEFAULT NULL,
+  `semi_annually` varchar(255) DEFAULT NULL,
+  `quarter` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `announcements_submitted_by_foreign` (`submitted_by`);
+
+--
+-- Indexes for table `carbon_footprints`
+--
+ALTER TABLE `carbon_footprints`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carbon_footprints_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `carbon_reports`
+--
+ALTER TABLE `carbon_reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carbon_solutions`
+--
+ALTER TABLE `carbon_solutions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sdgreport`
+--
+ALTER TABLE `sdgreport`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sdg_criterias`
+--
+ALTER TABLE `sdg_criterias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `announcements`
+--
+ALTER TABLE `announcements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `carbon_footprints`
+--
+ALTER TABLE `carbon_footprints`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `carbon_reports`
+--
+ALTER TABLE `carbon_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `carbon_solutions`
+--
+ALTER TABLE `carbon_solutions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `sdgreport`
+--
+ALTER TABLE `sdgreport`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `sdg_criterias`
+--
+ALTER TABLE `sdg_criterias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD CONSTRAINT `announcements_submitted_by_foreign` FOREIGN KEY (`submitted_by`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `carbon_footprints`
+--
+ALTER TABLE `carbon_footprints`
+  ADD CONSTRAINT `carbon_footprints_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
